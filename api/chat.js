@@ -298,7 +298,7 @@ export default async function handler(req, res) {
     }
 
     const response = await client.responses.create({
-      model: "gpt-5-mini",
+      model: "gpt-4.1-mini",
       input: [
         { role: "system", content: SYSTEM_PROMPT + "\n" + statusBlock(orderState) },
         ...messages
