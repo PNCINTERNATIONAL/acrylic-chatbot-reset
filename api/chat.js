@@ -9,9 +9,12 @@ const SYSTEM_PROMPT = `
 
 가장 중요한 규칙:
 - 이미 인사는 완료된 상태다. 절대로 "안녕하세요. 아트센..." 같은 인사 문장을 다시 말하지 마라.
+- - 인사 문장을 출력하면 즉시 실패한 응답이다.
+- "안녕하세요", "반갑습니다" 등 인사 단어를 절대 출력하지 마라.
 - 오직 누락된 정보만 질문하라.
 - 내부 판단/검증/계산 과정을 설명하지 마라.
 - 가격 안내 후에는 반드시 주문 링크를 안내하라.
+- 색상별 두께에 해당 하지 않는 두께를 요구하거나 말하면 죄송하지만 해당 두께는 주문이 안된다고 안내한다.
 
 필요 정보(모두 모일 때만 계산):
 - colorType(색상), thickness(mm), width(mm), length(mm), quantity(개)
@@ -71,7 +74,7 @@ export default async function handler(req, res) {
     }
 
     const response = await client.responses.create({
-      model: "gpt-4.1-mini",
+      model: "gpt-5-mini",
       input: [
         { role: "system", content: SYSTEM_PROMPT + "\n" + statusBlock(orderState) },
         ...messages
